@@ -1,6 +1,12 @@
 import React from "react";
-import { StyleSheet, Text, View, FlatList, SafeAreaView } from "react-native";
-import data from "../data";
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  SafeAreaView,
+  TouchableOpacity,
+} from "react-native";
 
 const Item = ({ name, details }) => (
   <View style={styles.item}>
@@ -15,22 +21,28 @@ const List = (props) => {
       return <Item name={item.name} details={item.details} />;
     }
 
-    if (item.name.toUpperCase().includes(props.searchPhrase.toUpperCase())) {
+    if (item.name.toUpperCase().includes(props.searchPhrase.toUpperCase().trim())) {
       return <Item name={item.name} details={item.details} />;
     }
 
-    if (item.details.toUpperCase().includes(props.searchPhrase.toUpperCase())) {
+    if (item.details.toUpperCase().includes(props.searchPhrase.toUpperCase().trim())) {
       return <Item name={item.name} details={item.details} />;
     }
   };
 
   return (
     <SafeAreaView style={styles.list__container}>
-      <FlatList
-        data={data}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-      />
+      <View
+        onStartShouldSetResponder={() => {
+          props.setClicked(false);
+        }}
+      >
+        <FlatList
+          data={props.data}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
+        />
+      </View>
     </SafeAreaView>
   );
 };

@@ -1,5 +1,10 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, SafeAreaView } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  StyleSheet,
+  Text,
+  SafeAreaView,
+  ActivityIndicator,
+} from "react-native";
 
 import List from "../components/List";
 import SearchBar from "../components/SearchBar";
@@ -7,6 +12,20 @@ import SearchBar from "../components/SearchBar";
 const Home = () => {
   const [searchPhrase, setSearchPhrase] = useState("");
   const [clicked, setClicked] = useState(false);
+  const [fakeData, setFakeData] = useState();
+
+  useEffect(() => {
+    const getData = async () => {
+      const apiResponse = await fetch(
+        "https://my-json-server.typicode.com/kevintomas1995/logRocket_searchBar/languages"
+      );
+      const data = await apiResponse.json();
+      setFakeData(data);
+    };
+    getData();
+  }, []);
+
+
 
   return (
     <SafeAreaView style={styles.root}>
@@ -17,7 +36,11 @@ const Home = () => {
         clicked={clicked}
         setClicked={setClicked}
       />
-      <List searchPhrase={searchPhrase} />
+      {!fakeData ? (
+        <ActivityIndicator size="large" />
+      ) : (
+        <List searchPhrase={searchPhrase} data={fakeData} setClicked={setClicked}/>
+      )}
     </SafeAreaView>
   );
 };

@@ -24,10 +24,8 @@ const SearchBar = (props) => {
           placeholder="Search"
           value={props.searchPhrase}
           onChangeText={props.setSearchPhrase}
-          //pointerEvents="box-only"
           onFocus={() => {
             props.setClicked(true);
-            console.log("clicked");
           }}
         />
         {props.clicked && (
