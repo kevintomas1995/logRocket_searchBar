@@ -8,8 +8,6 @@ const Home = () => {
   const [searchPhrase, setSearchPhrase] = useState("");
   const [clicked, setClicked] = useState(false);
 
-  console.log(clicked)
-
   return (
     <SafeAreaView style={styles.root}>
       {!clicked && <Text style={styles.section}>Programming Languages</Text>}
