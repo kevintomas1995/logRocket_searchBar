@@ -28,6 +28,7 @@ const SearchBar = (props) => {
             props.setClicked(true);
           }}
         />
+        
         {props.clicked && (
           <Entypo name="cross" size={20} color="black" style={{ padding: 1 }} onPress={() => {
               props.setSearchPhrase("")
@@ -58,6 +59,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     width: "90%",
+    
   },
   searchBar__unclicked: {
     padding: 10,
@@ -75,12 +77,10 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     alignItems: "center",
     justifyContent: "space-evenly",
-    //backgroundColor: "yellow"
   },
   input: {
     fontSize: 20,
     marginLeft: 10,
-    //backgroundColor: "red",
     width: "90%",
   },
 });

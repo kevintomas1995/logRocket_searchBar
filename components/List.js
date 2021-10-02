@@ -5,9 +5,9 @@ import {
   View,
   FlatList,
   SafeAreaView,
-  TouchableOpacity,
 } from "react-native";
 
+// definition of the Item, which will be rendered in the FlatList
 const Item = ({ name, details }) => (
   <View style={styles.item}>
     <Text style={styles.title}>{name}</Text>
@@ -15,17 +15,19 @@ const Item = ({ name, details }) => (
   </View>
 );
 
+// the filter
 const List = (props) => {
   const renderItem = ({ item }) => {
+    // when no input, show all
     if (props.searchPhrase === "") {
       return <Item name={item.name} details={item.details} />;
     }
-
-    if (item.name.toUpperCase().includes(props.searchPhrase.toUpperCase().trim())) {
+    // filter of the name
+    if (item.name.toUpperCase().includes(props.searchPhrase.toUpperCase().trim().replace(/\s/g, ""))) {
       return <Item name={item.name} details={item.details} />;
     }
-
-    if (item.details.toUpperCase().includes(props.searchPhrase.toUpperCase().trim())) {
+    // filter of the description
+    if (item.details.toUpperCase().includes(props.searchPhrase.toUpperCase().trim().replace(/\s/g, ""))) {
       return <Item name={item.name} details={item.details} />;
     }
   };
@@ -57,6 +59,8 @@ const styles = StyleSheet.create({
   },
   item: {
     margin: 30,
+    borderBottomWidth: 2,
+    borderBottomColor: "lightgrey"
   },
   title: {
     fontSize: 20,

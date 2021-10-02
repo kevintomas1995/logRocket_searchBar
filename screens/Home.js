@@ -1,3 +1,4 @@
+// Home.js
 import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
@@ -14,6 +15,7 @@ const Home = () => {
   const [clicked, setClicked] = useState(false);
   const [fakeData, setFakeData] = useState();
 
+  // get data from the fake api
   useEffect(() => {
     const getData = async () => {
       const apiResponse = await fetch(
@@ -25,11 +27,10 @@ const Home = () => {
     getData();
   }, []);
 
-
-
   return (
     <SafeAreaView style={styles.root}>
-      {!clicked && <Text style={styles.section}>Programming Languages</Text>}
+      {!clicked && <Text style={styles.title}>Programming Languages</Text>}
+
       <SearchBar
         searchPhrase={searchPhrase}
         setSearchPhrase={setSearchPhrase}
@@ -39,7 +40,13 @@ const Home = () => {
       {!fakeData ? (
         <ActivityIndicator size="large" />
       ) : (
-        <List searchPhrase={searchPhrase} data={fakeData} setClicked={setClicked}/>
+        
+          <List
+            searchPhrase={searchPhrase}
+            data={fakeData}
+            setClicked={setClicked}
+          />
+        
       )}
     </SafeAreaView>
   );
@@ -52,10 +59,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  section: {
-    textAlign: "center",
+  title: {
+    width: "100%",
     marginTop: 20,
     fontSize: 25,
     fontWeight: "bold",
+    marginLeft: "10%",
   },
 });
